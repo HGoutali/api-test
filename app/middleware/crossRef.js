@@ -8,6 +8,8 @@ const Customer = db.customer;
 
 
 function getIdsCustomer(req, res,next) {
+	
+	console.log(`getIdsCustomer.`);
   User.findByPk(req.userId).then(user => {
     user.getCustomers().then(customers => {
 		const result = [];
