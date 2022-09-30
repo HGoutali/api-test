@@ -3,9 +3,24 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
+/*var corsOptions = {
   origin: "http://localhost:8081"
+};*/
+let corsOrigins=[];
+
+if(process.env.REQUEST_ORIGIN){
+    corsOrigins=[process.env.REQUEST_ORIGIN];
+}
+else{
+    corsOrigins=["http://localhost:3000"];
+}
+const corsOptions = {
+    origin: corsOrigins,
+    methods:['GET','POST'],
+    allowedHeaders: ['Content-Type', 'Authorization';'x-access-token']   
 };
+
+
 
 app.use(cors(corsOptions));
 
