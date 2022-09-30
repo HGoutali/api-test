@@ -13,7 +13,7 @@ exports.allAccess = (req, res) => {
 
 exports.userBoard = (req, res) => {
   //console.log(${req.userId});
-  res.status(200).send("User Id: " + ${req.userId});
+  res.status(200).send(`User Id: ${req.userId}`);
   
  exports.adminBoard = (req, res) => {
   res.status(200).send("Admin Content.");
