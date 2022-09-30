@@ -21,6 +21,11 @@ const sequelize = new Sequelize(
 
 const db = {};
 
+var pg = require('pg');
+pg.defaults.ssl = true;
+
+
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
