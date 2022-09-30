@@ -17,7 +17,7 @@ else{
 const corsOptions = {
     origin: corsOrigins,
     methods:['GET','POST'],
-    allowedHeaders: ['Content-Type', 'Authorization';'x-access-token']   
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']   
 };
 
 
