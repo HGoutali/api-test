@@ -8,7 +8,7 @@ const CustomerData = db.customerData;
 exports.getCustomerContractRef  = (req, res) => {
 console.log("userId: " + req.userId); 
   CustomerData.findAll({
-        where: { object_id: req.userId }
+        where: { object_id: req.userId +''}
     }).then(tokens => {
         console.log(tokens.length);
 		
