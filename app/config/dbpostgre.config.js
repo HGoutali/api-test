@@ -1,10 +1,10 @@
 module.exports = {
   HOST: "ec2-54-228-125-183.eu-west-1.compute.amazonaws.com",
   USER: "xvxttkrnodwxyd",
-  PASSWORD: "84c6ff46da6febf2f9cd62b7224d7759e3de4cf39c9c93ab1a478bff4560181b",
+  PASSWORD: "14dc3dd5a841f76e6698872cbb806030294d661af78b82440133d2417f1607fa",
   DB: "d3e5upumbpjia0",
   dialect: "postgres",
-  port:5432,
+  port:5432, 
   dialectOptions: {
         ssl: {
             rejectUnauthorized: false,
