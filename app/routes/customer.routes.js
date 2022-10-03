@@ -10,6 +10,19 @@ module.exports = function(app) {
     );
     next();
   });
+  
+  
+  app.get(
+    "/api/test/customers",
+    [authJwt.verifyToken, crossRef.getIdsCustomer],
+    controller.getCustomer
+  );
+  
+  app.post(
+    "/api/test/customers",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.addCustomer
+  );
 
   app.get(
     "/api/test/customers/contract_refrences",

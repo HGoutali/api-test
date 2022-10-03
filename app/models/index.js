@@ -1,4 +1,5 @@
 const config = require("../config/dbpostgre.config.js");
+const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(
   config.DB,
