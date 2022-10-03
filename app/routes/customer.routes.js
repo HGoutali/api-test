@@ -10,8 +10,7 @@ module.exports = function(app) {
     );
     next();
   });
-  
-  
+
   app.get(
     "/api/test/customers",
     [authJwt.verifyToken, crossRef.getIdsCustomer],
@@ -23,7 +22,7 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.addCustomer
   );
-
+  
   app.get(
     "/api/test/customers/contract_refrences",
     [authJwt.verifyToken, crossRef.getIdsCustomer],
