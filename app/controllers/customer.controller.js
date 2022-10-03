@@ -1,5 +1,6 @@
 const db = require("../models");
 const CustomerData = db.customerData;
+const {Sequelize,Op} = require("sequelize");
 
 
 
@@ -8,13 +9,15 @@ const CustomerData = db.customerData;
 exports.getCustomerContractRef  = (req, res) => {
 console.log("userId: " + req.userId); 
   CustomerData.findAll({
-        where: { object_id: req.userId +''}
+        where: { [Op.and]: [{ object_id: req.userId +''}, { object_type: 'CONTRACT_REFERENCES'}]}
     }).then(tokens => {
         console.log(tokens.length);
-		
-		let result = tokens[0].object_value.replaceAll("'", '"');
 		res.setHeader("Content-Type","application/json");
-	res.status(200).send(result);
+		if(tokens.length > 1) {
+			let result = tokens[0].object_value.replaceAll("'", '"');
+			res.status(200).send(result);
+		} else
+			res.status(204).send("[]");
     }).catch(err => console.log('error: ' + err));
  
 };
