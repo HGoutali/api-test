@@ -32,13 +32,14 @@ exports.addCustomer = (req, res) => {
 
 
 exports.getCustomerContractRef  = (req, res) => {
-console.log("userId: " + req.userId); 
+  console.log("platform: " + req.header('x-platform'));
+  console.log("userId: " + req.userId); 
   CustomerData.findAll({
-        where: { [Op.and]: [{ object_id: req.userId +''}, { object_type: 'CONTRACT_REFERENCES'}]}
+        where: { [Op.and]: [{ object_type: 'CONTRACT_REFERENCES'}, { object_id: req.userId +''}, { platform: req.header('x-platform')}]}
     }).then(tokens => {
         console.log(tokens.length);
 		res.setHeader("Content-Type","application/json");
-		if(tokens.length > 1) {
+		if(tokens.length > 0) {
 			let result = tokens[0].object_value.replaceAll("'", '"');
 			res.status(200).send(result);
 		} else
@@ -48,7 +49,6 @@ console.log("userId: " + req.userId);
 };
 
 exports.addCustomerContractRef = (req, res) => {
-	console.log("platform:" + req.body.platform);
   CustomerData.create({
         platform: req.body.platform,
 		object_id: req.body.object_id,
