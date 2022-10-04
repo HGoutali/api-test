@@ -12,25 +12,25 @@ module.exports = function(app) {
   });
 
   app.get(
-    "/api/test/customers",
+    "/api/test/customers/v3/customer",
     [authJwt.verifyToken, crossRef.getIdsCustomer],
     controller.getCustomer
   );
   
   app.post(
-    "/api/test/customers",
+    "/api/test/customers/v3/customer",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.addCustomer
   );
   
   app.get(
-    "/api/test/customers/contract_refrences",
+    "/api/test/customers/v3/contract_refrences",
     [authJwt.verifyToken, crossRef.getIdsCustomer],
     controller.getCustomerContractRef
   );
   
   app.post(
-    "/api/test/customers/contract_refrences",
+    "/api/test/customers/v3/contract_refrences",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.addCustomerContractRef
   );
