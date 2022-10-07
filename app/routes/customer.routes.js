@@ -13,7 +13,7 @@ module.exports = function(app) {
 
   app.get(
     "/api/test/customers/v3/customer",
-    [authJwt.verifyToken, crossRef.getIdsCustomer],
+    [authJwt.verifyToken],
     controller.getCustomer
   );
   
@@ -25,7 +25,7 @@ module.exports = function(app) {
   
   app.get(
     "/api/test/customers/v3/contract_references",
-    [authJwt.verifyToken, crossRef.getIdsCustomer],
+    [authJwt.verifyToken],
     controller.getCustomerContractRef
   );
   

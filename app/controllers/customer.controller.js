@@ -4,9 +4,14 @@ const {Sequelize,Op} = require("sequelize");
 
 //customer
 exports.getCustomer  = (req, res) => {
-console.log("userId: " + req.idsCustomer.length); 
+var param1 = req.query.authent_id;
+var param2 = req.query.platform;
+
+console.log("userId: " + param1); 
+
   Customer_data.findOne({
-        where: { [Op.and]: [{ object_id: req.idsCustomer[0].authent_id},{platform: req.idsCustomer[0].platform},{ object_type: 'CUSTOMER'}]}
+        //where: { [Op.and]: [{ object_id: req.idsCustomer[0].authent_id},{platform: req.idsCustomer[0].platform},{ object_type: 'CUSTOMER'}]}
+		where: { [Op.and]: [{ object_id: param1},{platform: param2},{ object_type: 'CUSTOMER'}]}
     }).then(token => {
 		res.setHeader("Content-Type","application/json");
 		let result = token.object_value.replaceAll("'", '"');
@@ -32,10 +37,14 @@ exports.addCustomer = (req, res) => {
 
 
 exports.getCustomerContractRef  = (req, res) => {
-  console.log("platform: " + req.header('x-platform'));
-  console.log("userId: " + req.userId); 
+  var param1 = req.query.authent_id;
+  var param2 = req.query.platform;
+
+  console.log("userId: " + param1); 
+  console.log("platform: " + param2); 
+
   Customer_data.findAll({
-        where: { [Op.and]: [{ object_type: 'CONTRACT_REFERENCES'}, { object_id: req.idsCustomer[0].authent_id}, { platform: req.header('x-platform')}]}
+        where: { [Op.and]: [{ object_type: 'CONTRACT_REFERENCES'}, { object_id: param1}, { platform: param2}]}
     }).then(tokens => {
         console.log(tokens.length);
 		res.setHeader("Content-Type","application/json");
