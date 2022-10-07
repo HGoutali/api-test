@@ -24,13 +24,13 @@ module.exports = function(app) {
   );
   
   app.get(
-    "/api/test/customers/v3/contract_refrences",
+    "/api/test/customers/v3/contract_references",
     [authJwt.verifyToken, crossRef.getIdsCustomer],
     controller.getCustomerContractRef
   );
   
   app.post(
-    "/api/test/customers/v3/contract_refrences",
+    "/api/test/customers/v3/contract_references",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.addCustomerContractRef
   );

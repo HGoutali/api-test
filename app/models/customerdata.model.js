@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const CustomerData = sequelize.define("customerData", {
+  const Customer_data = sequelize.define("customer_data", {
     platform: {
       type: Sequelize.STRING
     },
@@ -14,5 +14,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
-  return CustomerData;
+  return Customer_data;
 };

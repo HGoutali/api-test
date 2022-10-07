@@ -2,16 +2,21 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
+const Digital_account = db.digital_account;
+
 
 const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const uuid = require('uuid');
+const uniqueRandomID = uuid.v4();
+
 
 exports.signup = (req, res) => {
   // Save User to Database
   User.create({
-    username: req.body.username,
+    authent_id: uniqueRandomID, //req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   })
@@ -43,7 +48,8 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
+      //username: req.body.username
+	  email: req.body.email
     }
   })
     .then(user => {
@@ -72,15 +78,22 @@ exports.signin = (req, res) => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
         }
+		
+		Digital_account.findAll({
+			where:{userId: user.id},}).then( digital_accounts => {
+	 
+	    //res.setHeader('x-oney-crossref',JSON.stringify(digital_accounts));
+		
         res.status(200).send({
           id: user.id,
-          username: user.username,
+          authent_id: user.authent_id,
           email: user.email,
           roles: authorities,
+		  ids: digital_accounts,
           accessToken: token
         });
       });
-    })
+    })})
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
