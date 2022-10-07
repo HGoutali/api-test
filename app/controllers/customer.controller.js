@@ -13,9 +13,14 @@ console.log("userId: " + param1);
         //where: { [Op.and]: [{ object_id: req.idsCustomer[0].authent_id},{platform: req.idsCustomer[0].platform},{ object_type: 'CUSTOMER'}]}
 		where: { [Op.and]: [{ object_id: param1},{platform: param2},{ object_type: 'CUSTOMER'}]}
     }).then(token => {
-		res.setHeader("Content-Type","application/json");
-		let result = token.object_value.replaceAll("'", '"');
-		res.status(200).send(result);
+		if (token) {
+			res.setHeader("Content-Type","application/json");
+			let result = token.object_value.replaceAll("'", '"');
+			res.status(200).send(result);
+		} else {
+			res.status(204).send("[]");
+		}
+		
     }).catch(err => console.log('error: ' + err));
  
 };
