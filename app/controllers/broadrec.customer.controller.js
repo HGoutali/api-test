@@ -1,65 +1,81 @@
-
+var axios = require('axios');
 
 
 
 exports.getCustomer = (req, res) => {
-	console.log('debut');
   var suburl = req.url.replaceAll('/broadrec', ''); // "/api/test/customers/v3/customer";
   var ids = JSON.parse(req.headers['x-oney-digital_accounts']);
   var param1 = ids[0].provider;
-  console.log('provider');
   var param2 = ids[0].authentId;
-  console.log('debut2');
-  
   var lurl = "http://" + req.headers['host'] + suburl + "?provider=" + param1 + "&authent_id=" + param2;
-  //var lurl =  lurl.replaceAll('"', '');
   var encoded = encodeURI(lurl);
-  console.log(encoded);
-  
-  var retour = "{ "+ '"url":' + suburl +', "digital_accounts":' + req.headers['x-oney-digital_accounts'] + "}";
+  //var retour = "{ "+ '"url":' + suburl +', "digital_accounts":' + req.headers['x-oney-digital_accounts'] + "}";
   //console.log(retour);
 	
-  res.setHeader("Content-Type","application/json");
+  //res.setHeader("Content-Type","application/json");
   //res.status(200).send(retour);
   res.redirect(encoded);
-  
- 
-  /*var param1 = JSON.stringify(ids[0].platform) ;
-  var param2 = JSON.stringify(ids[0].authent_id);
-  var location = req.headers['host'] + req.url + "?platform=" + param1 + "&authent_id=" + param2;
-  res.status(200).send(location);*/
-  
 };
 
-exports.getContractReferences = (req, res) => {
-	console.log('debut');
+exports.getContractReferences =   (req, res) => {
   var suburl = req.url.replaceAll('/broadrec', ''); // "/api/test/customers/v3/customer";
- 
   var ids = JSON.parse(req.headers['x-oney-digital_accounts']);
+  const listeURLs = [];
   
-   console.log(ids);
-  var param1 = JSON.stringify(ids[0].provider);
-  var param2 = JSON.stringify(ids[0].authentId);
-  var lurl = req.headers['host'] + suburl + "?provider=" + param1 + "&authent_id=" + param2;
-  var lurl =  lurl.replaceAll('"', '');
-  var encoded = encodeURI(lurl);
-  console.log(encoded);
+  // retrieve all the Backend URLs
+  ids.forEach(id => {
+	var param1 = id.provider;
+	var param2 = id.authentId;
+	var lurl = "http://" + req.headers['host'] + suburl + "?provider=" + param1 + "&authent_id=" + param2;
+	var encoded = encodeURI(lurl);
+	listeURLs.push(encoded);
+  });
   
-  var retour = "{ "+ '"url":' + suburl +', "digital_accounts":' + req.headers['x-oney-digital_accounts'] + "}";
-  console.log(retour);
+  
+  //
+  let posts = [];
+
+  // call all Backend URLs
+  // now we can use that data from the outside!
+
 	
+  listeURLs.forEach(url => {
+    axiosTesta(url)
+    .then(data => {
+        console.log({ url: url, data });
+		var contracts =  []; //JSON.stringfy(data);
+		//console.log("datataaa" + contracts);
+		for(let i = 0; i < contracts.length; i++) {
+			posts.push(data[i]);
+		}
+    })
+    .catch(err => console.log(err))
+  });
+  //
+
   res.setHeader("Content-Type","application/json");
-  res.status(200).send(retour);
-  //res.redirect(encoded);
   
- 
-  /*var param1 = JSON.stringify(ids[0].platform) ;
-  var param2 = JSON.stringify(ids[0].authent_id);
-  var location = req.headers['host'] + req.url + "?platform=" + param1 + "&authent_id=" + param2;
-  res.status(200).send(location);*/
+  res.send({ posts: posts });
+  //res.status(200).send(listeURLs[0]);
   
 };
 
+function axiosTest(url) {
+    // create a promise for the axios request
+    const promise = axios.get(url)
+
+    // using .then, create a new promise which extracts the data
+    const dataPromise = promise.then((response) => response.data)
+
+    // return it
+    return dataPromise
+};
+
+
+async function axiosTesta(url) {
+    const response = await axios.get(url)
+    return response.data
+}
 
  
  
