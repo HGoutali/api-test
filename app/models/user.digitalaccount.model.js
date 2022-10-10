@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Digital_account = sequelize.define("digital_accounts", {
-    authent_id: {
-      type: Sequelize.STRING
+    authentId: {
+      type: Sequelize.STRING,
+	  field: 'authent_id'
     },
     provider: {
       type: Sequelize.STRING
@@ -9,8 +10,9 @@ module.exports = (sequelize, Sequelize) => {
     platform: {
       type: Sequelize.STRING
     },
-	country_code: {
-      type: Sequelize.STRING
+	countryCode: {
+      type: Sequelize.STRING,
+	  field: 'country_code'
     },
     userId: {
       type: Sequelize.INTEGER

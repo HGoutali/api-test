@@ -86,10 +86,10 @@ exports.signin = (req, res) => {
 		
         res.status(200).send({
           id: user.id,
-          authent_id: user.authent_id,
+          authentId: user.authent_id,
           email: user.email,
           roles: authorities,
-		  digital_accounts: digital_accounts,
+		  digitalAccounts: digital_accounts,
           accessToken: token
         });
       });
