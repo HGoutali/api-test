@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Customer_data = sequelize.define("customer_data", {
-    platform: {
+    provider: {
       type: Sequelize.STRING
     },
     object_id: {

@@ -89,7 +89,7 @@ exports.signin = (req, res) => {
           authent_id: user.authent_id,
           email: user.email,
           roles: authorities,
-		  ids: digital_accounts,
+		  digital_accounts: digital_accounts,
           accessToken: token
         });
       });

@@ -5,13 +5,13 @@ const {Sequelize,Op} = require("sequelize");
 //customer
 exports.getCustomer  = (req, res) => {
 var param1 = req.query.authent_id;
-var param2 = req.query.platform;
+var param2 = req.query.provider;
 
 console.log("userId: " + param1); 
 
   Customer_data.findOne({
-        //where: { [Op.and]: [{ object_id: req.idsCustomer[0].authent_id},{platform: req.idsCustomer[0].platform},{ object_type: 'CUSTOMER'}]}
-		where: { [Op.and]: [{ object_id: param1},{platform: param2},{ object_type: 'CUSTOMER'}]}
+        //where: { [Op.and]: [{ object_id: req.idsCustomer[0].authent_id},{provider: req.idsCustomer[0].provider},{ object_type: 'CUSTOMER'}]}
+		where: { [Op.and]: [{ object_id: param1},{provider: param2},{ object_type: 'CUSTOMER'}]}
     }).then(token => {
 		if (token) {
 			res.setHeader("Content-Type","application/json");
@@ -26,9 +26,9 @@ console.log("userId: " + param1);
 };
 
 exports.addCustomer = (req, res) => {
-	console.log("platform:" + req.body.platform);
+	console.log("provider:" + req.body.provider);
   Customer_data.create({
-        platform: req.body.platform,
+        provider: req.body.provider,
 		object_id: req.body.object_id,
 		object_type: "CUSTOMER",
 		object_value: req.body.object_value,
@@ -43,13 +43,13 @@ exports.addCustomer = (req, res) => {
 
 exports.getCustomerContractRef  = (req, res) => {
   var param1 = req.query.authent_id;
-  var param2 = req.query.platform;
+  var param2 = req.query.provider;
 
   console.log("userId: " + param1); 
-  console.log("platform: " + param2); 
+  console.log("provider: " + param2); 
 
   Customer_data.findAll({
-        where: { [Op.and]: [{ object_type: 'CONTRACT_REFERENCES'}, { object_id: param1}, { platform: param2}]}
+        where: { [Op.and]: [{ object_type: 'CONTRACT_REFERENCES'}, { object_id: param1}, { provider: param2}]}
     }).then(tokens => {
         console.log(tokens.length);
 		res.setHeader("Content-Type","application/json");
@@ -64,7 +64,7 @@ exports.getCustomerContractRef  = (req, res) => {
 
 exports.addCustomerContractRef = (req, res) => {
   Customer_data.create({
-        platform: req.body.platform,
+        provider: req.body.provider,
 		object_id: req.body.object_id,
 		object_type: "CONTRACT_REFERENCES",
 		object_value: req.body.object_value,
