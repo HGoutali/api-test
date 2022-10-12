@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     },
 	authent_id: {
       type: Sequelize.STRING
+    },
+	description: {
+      type: Sequelize.STRING(500)
     }
   });
 
