@@ -89,7 +89,7 @@ exports.signin = (req, res) => {
           id: user.id,
           authentId: user.authent_id,
           email: user.email,
-          roles: authorities,
+          //roles: authorities,
 		  description: user.description,
 		  digitalAccounts: digital_accounts,
           accessToken: token
