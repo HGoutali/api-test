@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     object_value: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING(4000)
     }
   });
 

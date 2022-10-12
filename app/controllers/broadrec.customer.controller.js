@@ -33,29 +33,31 @@ exports.getContractReferences =   (req, res) => {
   
   
   //
-  let posts = [];
+  let posts = "";
 
   // call all Backend URLs
   // now we can use that data from the outside!
 
 	
   listeURLs.forEach(url => {
-    axiosTesta(url)
+    axiosTest(url)
     .then(data => {
-        console.log({ url: url, data });
-		var contracts =  []; //JSON.stringfy(data);
+		var ret ={ url: url, data };
+        console.log(ret);
+		posts = posts + ret;
+		/*var contracts =  []; //JSON.stringfy(data);
 		//console.log("datataaa" + contracts);
 		for(let i = 0; i < contracts.length; i++) {
 			posts.push(data[i]);
-		}
+		}*/
     })
     .catch(err => console.log(err))
   });
   //
-
-  res.setHeader("Content-Type","application/json");
+console.log("posts" + posts);
+  //res.setHeader("Content-Type","application/json");
   
-  res.send({ posts: posts });
+  res.send({ posts });
   //res.status(200).send(listeURLs[0]);
   
 };
