@@ -31,56 +31,37 @@ exports.getContractReferences =   (req, res) => {
 	listeURLs.push(encoded);
   });
   
-  
-  //
-  let posts = "";
-
   // call all Backend URLs
-  // now we can use that data from the outside!
-
-	
-  listeURLs.forEach(url => {
-    axiosTest(url)
-    .then(data => {
-		var ret ={ url: url, data };
-        console.log(ret);
-		posts = posts + ret;
-		/*var contracts =  []; //JSON.stringfy(data);
-		//console.log("datataaa" + contracts);
-		for(let i = 0; i < contracts.length; i++) {
-			posts.push(data[i]);
-		}*/
-    })
-    .catch(err => console.log(err))
-  });
-  //
-console.log("posts" + posts);
-  //res.setHeader("Content-Type","application/json");
-  
-  res.send({ posts });
-  //res.status(200).send(listeURLs[0]);
-  
-};
-
-function axiosTest(url) {
-    // create a promise for the axios request
-    const promise = axios.get(url)
-
-    // using .then, create a new promise which extracts the data
-    const dataPromise = promise.then((response) => response.data)
-
-    // return it
-    return dataPromise
+  getAlunoArrayAsync(listeURLs,res);
 };
 
 
-async function axiosTesta(url) {
-    const response = await axios.get(url)
-    return response.data
-}
+ 
+
 
  
  
+ 
+ 
+ async function getAlunoArrayAsync (listeURLs, res) {
+  let posts = [];
+
+  // retrieve and filter all the tags from the URL
+  //const tags = getTags(req.query.tags);
+
+  for(let i = 0; i < listeURLs.length; i++) {
+    const { data: contracts } = await axios.get(
+      listeURLs[i]
+    );
+
+    for(contract of contracts) {
+		posts.push(contract);
+	}
+  }
+
+  return res.send({ contract_references: posts });
+};
+
 
 
    
