@@ -6,8 +6,9 @@ module.exports = (sequelize, Sequelize) => {
     value: {
       type: Sequelize.STRING
     },
-    digital_accountId: {
-      type: Sequelize.INTEGER
+    digitalAccountId: {
+      type: Sequelize.INTEGER,
+	  field: 'digital_accountId'
     }
   });
 

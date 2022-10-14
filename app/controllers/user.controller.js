@@ -11,13 +11,15 @@ exports.allAccess = (req, res) => {
 };
 
 
-exports.userBoard = (req, res) => {
+exports.userBoard = async(req, res) => {
   //console.log(${req.userId});
-  res.status(200).send(`User Id: ${req.userId}`);
   
- exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
-};
+  const requestURLs = [
+  {url:'https://ghibliapi.herokuapp.com/films?producer=Toshio%20Suzuki'},
+  {url:'https://ghibliapi.herokuapp.com/films?producer=Hayao%20Miyazaki'}
+];
+
+res.status(200).send("User Content.");
 
 };
 
@@ -29,24 +31,4 @@ exports.moderatorBoard = (req, res) => {
   res.status(200).send("Moderator Content.");
 };
 
-//
-function addNewPosts(oldPosts, newPosts) {
-  for (let i = 0; i < newPosts.length; i++) {
-    isAlreadyAvailable = false;
-
-    for (let j = 0; j < oldPosts.length; j++) {
-      if (_.isEqual(oldPosts[j], newPosts[i])) {
-        isAlreadyAvailable = true;
-        break;
-      }
-    }
-
-    // add a post to old posts only if it already has not added
-    if (!isAlreadyAvailable) {
-      oldPosts.push(newPosts[i]);
-    }
-  }
-
-  return oldPosts;
-}
 

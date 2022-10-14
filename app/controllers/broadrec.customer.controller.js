@@ -46,8 +46,6 @@ exports.getContractReferences =   (req, res) => {
  async function getAlunoArrayAsync (listeURLs, res) {
   let posts = [];
 
-  // retrieve and filter all the tags from the URL
-  //const tags = getTags(req.query.tags);
 
   for(let i = 0; i < listeURLs.length; i++) {
     const { data: contracts } = await axios.get(
