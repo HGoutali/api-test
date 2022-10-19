@@ -17,3 +17,6 @@ module.exports = {
     idle: 10000
   }
 };
+
+
+.\pg_dump dfc8nvqq60i3fb > C:\dev\donnees\postgre\heloku_sauvegarde.sql
