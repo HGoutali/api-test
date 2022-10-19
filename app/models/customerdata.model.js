@@ -3,11 +3,14 @@ module.exports = (sequelize, Sequelize) => {
     provider: {
       type: Sequelize.STRING
     },
-    object_id: {
-      type: Sequelize.STRING
+	authent_id_field: {
+      type: Sequelize.STRING(25)
+    },
+    authent_id: {
+      type: Sequelize.STRING(100)
     },
     object_type: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING(25)
     },
     object_value: {
       type: Sequelize.STRING(4000)
