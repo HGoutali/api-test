@@ -1,10 +1,11 @@
 {
   "name": "node-js-jwt-auth",
   "version": "1.0.0",
-  "description": "Node.js Demo for JWT Authentication",
+  "description": "Node.js  for API test",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node server.js"
   },
   "keywords": [
     "node.js",
