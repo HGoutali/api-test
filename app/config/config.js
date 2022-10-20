@@ -27,7 +27,7 @@ const test = {
  },
  db: {
   host: process.env.DEV_DB_HOST || 'ec2-34-252-35-249.eu-west-1.compute.amazonaws.com',
-  port: parseInt(process.env.DEV_DB_PORT) || 5432,
+  port: parseInt(process.env.PORT) || 5432,
   user: process.env.DEV_DB_USER || 'dsqksqybiecasp',
   password: process.env.DEV_DB_PASSWORD || '14dc3dd5a841f76e6698872cbb806030294d661af78b82440133d2417f1607fa',
   name: process.env.DEV_DB_NAME || 'dfc8nvqq60i3fb',
