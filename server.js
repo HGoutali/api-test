@@ -34,7 +34,7 @@ require('./app/routes/customer.routes')(app);
 require('./app/routes/broadrec.customer.routes')(app);
 
 // set port, listen for requests
-const PORT = config.app.port;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
