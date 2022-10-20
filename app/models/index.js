@@ -1,20 +1,22 @@
-const config = require("../config/dbpostgre.config.js");
+const configold = require("../config/dbpostgre.config.js");
+const config = require('../config/config.js');
+
 
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
-  config.DB,
-  config.USER,
-  config.PASSWORD,
+  config.db.name,
+  config.db.user,
+  config.db.password,
   {
-    host: config.HOST,
-    dialect: config.dialect,
+    host: config.db.host,
+    dialect: config.db.dialect,
     
 
     pool: {
-      max: config.pool.max,
-      min: config.pool.min,
-      acquire: config.pool.acquire,
-      idle: config.pool.idle
+      max: config.db.pool.max,
+      min: config.db.pool.min,
+      acquire: config.db.pool.acquire,
+      idle: config.db.pool.idle
     }
   }
 );
