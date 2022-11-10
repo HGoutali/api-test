@@ -30,4 +30,11 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+  
+  
+    app.get(
+    "/api/test/user/digitalAccounts",
+    [authJwt.verifyToken, crossRef.getIdsCustomer],
+    controller.getDigitalAccounts
+  );
 };
