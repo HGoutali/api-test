@@ -12,14 +12,14 @@ module.exports = function(app) {
   });
 
   app.get(
-    "/api/test/broadrec/customers/v3/customer",
+    "/api/test/broadrec/customer/v1/customers",
     [],
     controller.getCustomer
   );
   
 
   app.get(
-    "/api/test/broadrec/customers/v3/contract_references",
+    "/api/test/broadrec/customer/v1/contractSummary",
     [],
     controller.getContractReferences
   );

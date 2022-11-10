@@ -5,9 +5,9 @@ var axios = require('axios');
 exports.getCustomer = (req, res) => {
   var suburl = req.url.replaceAll('/broadrec', ''); // "/api/test/customers/v3/customer";
   var ids = JSON.parse(req.headers['x-oney-digital_accounts']);
-  var param1 = ids[0].authentIdField;
-  var param2 = ids[0].authentId;
-  var lurl = "http://" + req.headers['host'] + suburl + "?authent_id_field=" + param1 + "&authent_id=" + param2;
+  var param1 = ids[0].authentIdType;
+  var param2 = ids[0].authentIdValue;
+  var lurl = "http://" + req.headers['host'] + suburl + "?authentIdType=" + param1 + "&authentIdValue=" + param2;
   var encoded = encodeURI(lurl);
   //var retour = "{ "+ '"url":' + suburl +', "digital_accounts":' + req.headers['x-oney-digital_accounts'] + "}";
   //console.log(retour);
@@ -24,9 +24,9 @@ exports.getContractReferences =   (req, res) => {
   
   // retrieve all the Backend URLs
   ids.forEach(id => {
-	var param1 = id.authentIdField;
-	var param2 = id.authentId;
-	var lurl = "http://" + req.headers['host'] + suburl + "?authent_id_field=" + param1 + "&authent_id=" + param2;
+    var param1 = ids[0].authentIdType;
+    var param2 = ids[0].authentIdValue;
+	var lurl = "http://" + req.headers['host'] + suburl + "?authentIdType=" + param1 + "&authentIdValue=" + param2;
 	var encoded = encodeURI(lurl);
 	listeURLs.push(encoded);
   });

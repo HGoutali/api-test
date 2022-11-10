@@ -12,20 +12,20 @@ module.exports = function(app) {
   });
 
   app.get(
-    "/api/test/customers/v3/customer",
+    "/api/test/customer/v1/customers",
     //[authJwt.verifyToken],
 	[],
     controller.getCustomer
   );
   
   app.post(
-    "/api/test/customers/v3/customer",
+    "/api/test/customer/v1/customers",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.addCustomer
   );
   
   app.get(
-    "/api/test/customers/v3/contract_references",
+    "/api/test/customer/v1/contractSummary",
     //[authJwt.verifyToken],
 	[],
     controller.getCustomerContractRef

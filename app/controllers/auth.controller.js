@@ -90,7 +90,7 @@ exports.signin = (req, res) => {
         }
 		
 		Digital_account.findAll({
-			where:{userId: user.id}, attributes:['authentId','authentIdField','provider','platform','countryCode']}).then( digital_accounts => {
+			where:{userId: user.id}, attributes:['authentIdValue','authentIdType','provider','platformCode','countryCode']}).then( digital_accounts => {
 	 
 	    //res.setHeader('x-oney-crossref',JSON.stringify(digital_accounts));
 		

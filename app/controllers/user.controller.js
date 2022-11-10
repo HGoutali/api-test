@@ -1,6 +1,10 @@
 const axios = require('axios');
 const fs = require('fs').promises;
 
+const db = require("../models");
+const User = db.user;
+const Digital_account = db.digital_account;
+
 const crossRef = require("../middleware/crossRef.js");
 
 
@@ -29,6 +33,33 @@ exports.adminBoard = (req, res) => {
 
 exports.moderatorBoard = (req, res) => {
   res.status(200).send("Moderator Content.");
+};
+
+exports.getDigitalAccounts = (req, res) => {
+	let param1 = req.query.authentIdValue;
+    let param2 = req.query.authentIdType;
+	
+	console.log(">> authentId: ", param1);
+	
+	User.findOne({
+    where: {
+      //username: req.body.username
+	  authent_id: param1
+    }
+  })
+    .then(user => {
+ 
+	Digital_account.findAll({
+			where:{userId: user.id}, attributes:['authentIdValue','authentIdType','provider','platformCode','countryCode']}).then( digital_accounts => {
+		
+        res.status(200).send({
+		  digitalAccounts: digital_accounts
+        });
+      })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+	});
 };
 
 
