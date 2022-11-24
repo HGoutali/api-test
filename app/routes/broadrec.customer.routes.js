@@ -19,7 +19,7 @@ module.exports = function(app) {
   
 
   app.get(
-    "/api/test/broadrec/customer/v1/contractSummary",
+    "/api/test/broadrec/contract/v1/contracts",
     [],
     controller.getContractReferences
   );

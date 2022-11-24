@@ -25,14 +25,14 @@ module.exports = function(app) {
   );
   
   app.get(
-    "/api/test/customer/v1/contractSummary",
+    "/api/test/contract/v1/contracts",
     //[authJwt.verifyToken],
 	[],
     controller.getCustomerContractRef
   );
   
   app.post(
-    "/api/test/customers/v3/contract_references",
+    "/api/test/contract/v1/contracts",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.addCustomerContractRef
   );
